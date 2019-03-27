@@ -1,0 +1,12 @@
+//GDG4     JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                     
+//*                                                   
+//* ALTERS THE GDG LIMIT FROM 2 TO 3.                 
+//*                                                   
+//STEP1    EXEC  PGM=IDCAMS                           
+//SYSPRINT DD    SYSOUT=A                             
+//SYSIN    DD    *                                    
+     ALTER -                                          
+           MFAPP13.PROJ2D1.GDG-                       
+           LIMIT(3)                                   
+/*                                                    
