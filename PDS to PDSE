@@ -1,0 +1,33 @@
+//PROJ2A1  JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,               
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                                    
+//*                                                                  
+//* STEP1 EXECUTES IEBCOPY. COPYS PDS TO PDS2A1. CREATES PDS2A1 WITH 
+//* FOLLOWING ATTRIBUTES.                                            
+//* STEP2 EXECUTES IEBCOPY. COPYS PDS TO PDS2A2. CREATES PDS2A2 WITH 
+//* FOLLOWING ATTRIBUTES THOUGH MAKES IT A PDSE NOT PDS.             
+//*                                                                  
+//STEP1    EXEC PGM=IEBCOPY                                          
+//SYSPRINT DD SYSOUT=*                                               
+//IN1      DD   DSN=APPREN.MASTER.PDS,DISP=SHR                       
+//OUT2     DD   DSN=MFAPP13.MASTER.PDS2A1,                           
+//            DISP=(NEW,CATLG),                                      
+//            VOL=SER=VPMVSB,                                        
+//            UNIT=3390,                                             
+//            BLKSIZE=27920,                                         
+//            RECFM=FB,LRECL=80,                                     
+//            SPACE=(CYL,(1,1,1))                                    
+  COPY  INDD=IN1,OUTDD=OUT2                                          
+/*                                                                   
+//STEP2    EXEC PGM=IEBCOPY                                          
+//SYSPRINT DD SYSOUT=*                                               
+//IN2      DD   DSN=APPREN.MASTER.PDS,DISP=SHR                       
+//OUT3     DD   DSN=MFAPP13.MASTER.PDS2A2,                           
+//            DISP=(NEW,CATLG),                                      
+//            VOL=SER=VPMVSB,                                        
+//            UNIT=3390,                                             
+//            BLKSIZE=27920,                                         
+//            RECFM=FB,LRECL=80,                                     
+//            DSNTYPE=LIBRARY,                                       
+//            SPACE=(CYL,(1,1,1))                                    
+  COPY  INDD=IN2,OUTDD=OUT3                                          
+/*                                                                   
