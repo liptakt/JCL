@@ -1,0 +1,19 @@
+//SEQ1     JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID  
+//*
+//* Create new member called sysuid.master.seq
+//* Copy appren.master.seq into new seq member
+//*
+//STEP1    EXEC PGM=IEFBR14                           
+//NEWPDS   DD   DSN=MFAPP13.MASTER.SEQ,               
+//            DISP=(NEW,CATLG),                       
+//            VOL=SER=VPMVSB,                         
+//            UNIT=3390,                              
+//            BLKSIZE=27920,                          
+//            RECFM=FB,LRECL=80,                      
+//            SPACE=(CYL,(1,1))                       
+//STEP2    EXEC PGM=IEBGENER                          
+//SYSPRINT DD  SYSOUT=*                               
+//SYSIN    DD  DUMMY                                  
+//SYSUT1   DD  DSN=APPREN.MASTER.SEQ,DISP=SHR         
+//SYSUT2   DD  DSN=MFAPP13.MASTER.SEQ,DISP=SHR        
