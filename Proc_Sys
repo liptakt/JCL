@@ -1,0 +1,31 @@
+//PROJ2C7  JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,                  
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                                       
+// JCLLIB ORDER=(APPREN.PROCLIB)                                        
+//*********************************************************************/
+//*                                                                   */
+//*  This job calls APPREN.PROCLIB(PROC2C7) to allocate a             */
+//*  sequential dataset.  You need to modify this JCL so it           */
+//*  allocates &SYSUID.PROC2C7.SEQ.  Do NOT modify the PROC!          */
+//*  create sysut2 to allocate new dataset                            */
+//*********************************************************************/
+//*                                                                     
+//JS000100 EXEC PROC2C7                                                 
+//PS000100.SYSUT2 DD DSN=MFAPP13.PROJ2C7.SEQ,                           
+//        DISP=(NEW,CATLG,DELETE),                                      
+//        DCB=(RECFM=FB,LRECL=80,BLKSIZE=27920,DSORG=PS),               
+//        UNIT=SYSDA,SPACE=(CYL,(1,1))   
+//*
+//*
+//*
+//*********************************************************************
+//*                                                                   *
+//*  This PROC executes IEFBR14. Proc for the example above           *
+//*                                                                   *
+//*********************************************************************
+//ALLOCSEQ PROC                                                        
+//PS000100 EXEC PGM=IEFBR14                                            
+//SYSPRINT DD  SYSOUT=*                                                
+//SYSIN    DD  DUMMY                                                   
+//SYSUT1   DD  DSN=APPREN.MASTER.SEQ,                                  
+//             DISP=SHR                                                
+//SYSUT2   DD  DUMMY                                                   
