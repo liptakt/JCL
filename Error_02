@@ -1,0 +1,27 @@
+//PROJ2B2  JOB 'D6077P,B0082B09','NEIL SHAH',MSGCLASS=H,CLASS=A,      
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                                     
+//******************************************************************* 
+//* This job has errors.                                             
+//* Instream proc to allocate a PDS.
+//*Corrected errors:                                              
+//*Added PGM= to STEP1 EXEC; Changed SPACE to (1,1,10), DSORG from
+//*P0 to PO                                                       
+//*Added PEND statement to end of ALLPROC, corrected HLQ          
+//******************************************************************* 
+//ALLPROC  PROC HLQ=                                                  
+//STEP1    EXEC PGM=IEFBR14                                           
+//SYSPRINT DD SYSOUT=*                                                
+//ALLOC    DD DSN=&HLQ,DISP=(NEW,CATLG,DELETE),                       
+//            SPACE=(CYL,(1,1,1)),                                    
+//            DCB=(DSORG=PO,RECFM=FB,LRECL=80)                        
+//         PEND                                                       
+//******************************************************************* 
+//* Execute PROC                                                    * 
+//* Enter your HLQ, i.e. hlq.PROJ2B2.PDS                            * 
+//*                                                                 * 
+//* included jcllib just so it can look in this dataset first       * 
+//******************************************************************* 
+//*                                                                   
+//LIB      JCLLIB ORDER=MFAPP13.PT2B.ERRORS                           
+//RUNPROC  EXEC PROC=ALLPROC,                                         
+//         HLQ=MFAPP13.PROJ2B2.PDS                                    
