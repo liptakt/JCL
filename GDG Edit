@@ -1,0 +1,31 @@
+//GDD3   JOB 'COLUM,MO','LIPTAK,TREVOR',MSGCLASS=H,CLASS=A,     
+//         MSGLEVEL=(1,1),NOTIFY=&SYSUID                      
+//*******************************************                 
+//*                                         *                 
+//* creates a new gdg(+1) and writes text:  *                 
+//* "this is the 3rd gdg, where did it go?" *                 
+//*                                         *                 
+//*******************************************                 
+//STEP1    EXEC PGM=IEBGENER                                  
+//SYSPRINT DD   SYSOUT=*                                      
+//SYSUT1   DD   *                                             
+ This is the 3rd GDG, where did it go?                        
+/*                                                            
+//SYSUT2   DD   DSN=&SYSUID..PROJ2D1.GDG(+1),                 
+//             DISP=(NEW,CATLG,DELETE),                       
+//             SPACE=(TRK,5),UNIT=SYSDA,                      
+//             DCB=(RECFM=VB,LRECL=133,BLKSIZE=13300,DSORG=PS)
+//SYSIN    DD   DUMMY                                         
+//*******************************************************     
+//*                                                     *     
+//* append output from step1 to add the following text: *     
+//* "this is the 2nd line in gdg#3"                     *     
+//*                                                     *     
+//*******************************************************     
+//STEP2    EXEC PGM=IEBGENER                                  
+//SYSPRINT DD   SYSOUT=*                                      
+//SYSUT1   DD   *                                             
+ This is the 2nd line in GDG#3                                
+/*                                                            
+//SYSUT2   DD   DSN=&SYSUID..PROJ2D1.GDG(+1),DISP=MOD         
+//SYSIN    DD   DUMMY
