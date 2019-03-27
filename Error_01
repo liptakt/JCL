@@ -1,0 +1,12 @@
+//PROJ2B1  JOB 'COLUMBIA,MO','LIPTAK,TREVOR',MSGCLASS=H,CLASS=A,        
+//             MSGLEVEL=(1,1),NOTIFY=&SYSUID                         
+//*
+//*Corrected errors:                                                
+//*SPACE parameter on ALLOC DD statement changed from (CYLS,(1,1))  
+//*to (CYL,(1,1,10)) with comma to continue DD to next line         
+//*
+//STEP1    EXEC PGM=IEFBR14                                          
+//SYSPRINT DD  SYSOUT=*                                              
+//ALLOC    DD  DSN=MFAPP13.PROJ2B1.PDS,DISP=(NEW,CATLG,DELETE),      
+//             UNIT=SYSDA,SPACE=(CYL,(1,1,10)),                      
+//             DCB=(DSORG=PO,RECFM=FB,LRECL=80)                      
