@@ -1,0 +1,12 @@
+//GDG5     JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                     
+//*                                                   
+//* DELETES THE &SYSUID.PROJ2D1.GDG BASE AND VERSIONS 
+//*                                                   
+//STEP1    EXEC  PGM=IDCAMS                           
+//SYSPRINT DD    SYSOUT=*                             
+//SYSIN    DD    *                                    
+     DELETE-                                          
+           MFAPP13.PROJ2D1.GDG-                       
+           GDG FORCE                                  
+/*                                                    
