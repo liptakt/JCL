@@ -1,0 +1,9 @@
+//PROJ2A1  JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                     
+//*                                                   
+//* CALL JCLIB TO SEARCH FOR PROC                     
+//* EXECUTING PROC TO ALLOCATE PDS2A3                 
+//*                                                   
+//STEP1    JCLLIB ORDER=(APPREN.PROCLIB)              
+//STEP2    EXEC PROC=ALLOCPDS,                        
+//         MYDSN=MFAPP13.MASTER.PDSE2A2               
