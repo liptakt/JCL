@@ -1,0 +1,22 @@
+//JCL3     JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,          
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                               
+//*                                                             
+//* EXECUTES IEBCOPY. COPYS PDS TO MEMBER3. CREATES MEMBER3 WITH
+//* FOLLOWING ATTRIBUTES. SELECTS MEMBER2 FROM PDS AND COPYS IT 
+//* TO MEMBER3 WITH THE NEW NAMEOF MFAPP13.                     
+//*                                                             
+//STEP1    EXEC PGM=IEBCOPY                                     
+//SYSPRINT DD SYSOUT=*                                          
+//IN1      DD   DSN=APPREN.MASTER.PDS,DISP=SHR                  
+//OUT2     DD   DSN=MFAPP13.MASTER.MEMBER3,                     
+//            DISP=(NEW,CATLG),                                 
+//            VOL=SER=VPMVSB,                                   
+//            UNIT=3390,                                        
+//            BLKSIZE=27920,                                    
+//            RECFM=FB,LRECL=80,                                
+//            SPACE=(CYL,(1,1,1))                               
+//*                                                             
+//SYSIN    DD *                                                 
+   COPY   OUTDD=OUT2,INDD=IN1                                   
+   SELECT MEMBER=((MEMBER2,MFAPP13))                            
+/*                                                              
