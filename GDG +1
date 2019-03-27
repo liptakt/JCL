@@ -1,0 +1,33 @@
+//GDG2   JOB 'COLUM,MO','LIPTAK,TREVOR',MSGCLASS=H,CLASS=A,      
+//         MSGLEVEL=(1,1),NOTIFY=&SYSUID                       
+//*****************************************************        
+//*                                                   *        
+//* COPIES &SYSUID.PROJ2B3.SEQ TO &SYSUID.PROJ2D1.GDG *        
+//*              FIRST(+1) GENERATION                 *        
+//*                                                   *        
+//*****************************************************        
+//STEP1    EXEC PGM=IEBGENER                                   
+//SYSPRINT DD SYSOUT=*                                         
+//SYSUT1   DD DSN=&SYSUID..PROJ2B3.SEQ,DISP=SHR                
+//SYSUT2   DD DSN=&SYSUID..PROJ2D1.GDG(+1),                    
+//           DISP=(NEW,CATLG,DELETE),                          
+//           SPACE=(TRK,5),UNIT=SYSDA,                         
+//           DCB=(RECFM=VB,LRECL=133,BLKSIZE=13300,DSORG=PS)   
+//SYSIN    DD DUMMY                                            
+//*************************************************************
+//*                                                           *
+//* COPIES &SYSUID.PROJ2B3.SEQ TO &SYSUID.PROJ2D1.GDG         *
+//* AND ADDS "AND THIS ONE ALSO" TO THE SECOND(+2) GENERATION *
+//*                                                           *
+//*************************************************************
+//STEP2    EXEC PGM=IEBGENER                                   
+//SYSPRINT DD SYSOUT=*                                         
+//SYSUT1   DD DSN=&SYSUID..PROJ2B3.SEQ,DISP=SHR                
+//         DD *                                                
+  AND THIS ONE ALSO                                            
+/*                                                             
+//SYSUT2   DD DSN=&SYSUID..PROJ2D1.GDG(+2),                    
+//           DISP=(NEW,CATLG,DELETE),                          
+//           SPACE=(TRK,5),UNIT=SYSDA,                         
+//           DCB=(RECFM=VB,LRECL=133,BLKSIZE=13300,DSORG=PS) 
+//SYSIN    DD *
