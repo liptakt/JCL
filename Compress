@@ -1,0 +1,13 @@
+//JCLPT2C4    JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,              
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                                      
+//*                                                                    
+//* Compress mfapp13.proj2b1.pds                                       
+//* specify the same ddname for both the OUTDD and INDD parameters of a
+//* COPY statement, without specifying the SELECT / EXCLUDE statement. 
+//*                                                                    
+//STEP2    EXEC PGM=IEBCOPY                                            
+//SYSPRINT DD SYSOUT=*                                                 
+//IN1      DD   DSN=MFAPP13.PROJ2B1.PDS,DISP=OLD                       
+//IN2      DD   DSN=MFAPP13.PROJ2B1.PDS,DISP=OLD                       
+//SYSIN    DD *                                                        
+    COPY INDD=IN1,OUTDD=IN2                                            
