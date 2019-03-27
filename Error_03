@@ -1,0 +1,16 @@
+//PROJ2B3  JOB 'D6077P,B0082B09','NEIL SHAH',MSGCLASS=H,CLASS=A,      
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                                     
+//******************************************************************* 
+//* This job has errors.                                            * 
+//*  Corrected errors:                                             
+//*CLASS from P to A. Added SYSIN DD DUMMY                       
+//*Changed SPACE from (TRK,1,1) to (TRK,(1,1)), added comma after
+//*DISP parameter to continue DD.                                   * 
+//******************************************************************* 
+//STEP1  EXEC PGM=IEBGENER                                            
+//SYSPRINT DD SYSOUT=*                                                
+//SYSUT2   DD DSN=&SYSUID..PROJ2B3.SEQ,DISP=(NEW,CATLG,DELETE),       
+//            SPACE=(TRK,(1,1)),DSORG=PS,RECFM=FB,LRECL=80            
+//SYSUT1   DD *                                                       
+  I hope this job works ; -)                                          
+//SYSIN    DD DUMMY                                                   
