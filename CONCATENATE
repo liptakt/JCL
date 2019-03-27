@@ -1,0 +1,36 @@
+//CONCAT   JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,                 
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                                      
+//*                                                                    
+//* 1) CREATE A ONE STEP JOB TO CONCATENATE MFAPP42.PROJZ1.FILE1 AND   
+//* MFAPP42.PROJZ1.FILE2.                                              
+//* 2) CREATE A ONE STEP JOB TO COPY THE OUTPUT OF #1 TO A NEW DATASET 
+//* WITH THE PHRASES "HEADER INFO" AT THE BEGINNING AND "TRAILER INFO" 
+//* AT THE END.                                                        
+//*                                                                    
+//* SYSUT1 WILL RESOLVE TO THE FIRST DATA SET, FILE1, DEFINED BY THE   
+//* DDNAME FORWARD REFERENCE SYSUT1 FILE2, THE SECOND DATA SET IN THE  
+//* DDNAME FORWARD REFERENCE SYSUT1 WILL BE APPENDED TO SYSUT1 AS WELL.
+//* IEBGENER WILL RECOGNIZE FILE1 AND FILE2 AS INPUT.                  
+//*                                                                    
+//* DO NOT CONCATENATE DATA SETS AFTER A DUMMY DATA SET                
+//* DO NOT CODE OTHER STATEMENTS BETWEEN CONCATENATED DD STATEMENTS    
+//*                                                                    
+//STEP1      EXEC PGM=IEBGENER                                         
+//SYSPRINT DD SYSOUT=*                                                 
+//SYSUT1   DD DSN=MFAPP42.PROJZ1.FILE1,DISP=SHR                        
+//         DD DSN=MFAPP42.PROJZ1.FILE2,DISP=SHR                        
+//SYSUT2   DD DSN=MFAPP13.CONCAT.SEQ,DISP=(NEW,CATLG),                 
+//            SPACE=(TRK,(1,1)),DSORG=PS,RECFM=FB,LRECL=80             
+//SYSIN    DD DUMMY                                                    
+//*                                                                    
+//*                                                                    
+//STEP2  EXEC PGM=IEBGENER                                             
+//SYSPRINT DD SYSOUT=*                                                 
+//SYSUT1   DD *                                                        
+ HEADER INFO                                                           
+//         DD DSN=MFAPP13.CONCAT.SEQ,DISP=SHR                          
+//         DD *                                                        
+ TRAILER INFO                                                          
+//SYSUT2   DD DSN=MFAPP13.CONCAT.SEQ2,DISP=(NEW,CATLG),                
+//            SPACE=(TRK,(1,1)),DSORG=PS,RECFM=FB,LRECL=80             
+//SYSIN    DD DUMMY                                                    
