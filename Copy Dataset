@@ -1,0 +1,11 @@
+//APEND1   JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                     
+//*                                                   
+//* EXECUTE IEBGENER TO COPY DATASET                  
+//* COPYING TO BOTTOM OF DATASET                      
+//*                                                   
+//STEP2    EXEC PGM=IEBGENER                          
+//SYSPRINT DD  SYSOUT=*                               
+//SYSIN    DD  DUMMY                                  
+//SYSUT1   DD  DSN=APPREN.MASTER.SEQ,DISP=SHR         
+//SYSUT2   DD  DSN=MFAPP13.MASTER.SEQ2A4,DISP=MOD     
