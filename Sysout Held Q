@@ -1,0 +1,11 @@
+//PT2C     JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,     
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                          
+//*                                                        
+//* COPYS A SEQ MEMBER TO THE SYSOUT H WHICH IS THE HELD Q.
+//* TO VIEW GO TO ST THEN H TO LOOK AT THE OUTPUT.         
+//*                                                        
+//STEP1  EXEC PGM=IEBGENER                                 
+//SYSPRINT DD SYSOUT=*                                     
+//SYSIN    DD DUMMY                                        
+//SYSUT1   DD DSN=MFAPP13.PROJ2B3.SEQ,DISP=SHR             
+//SYSUT2   DD SYSOUT=H                                     
