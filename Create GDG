@@ -1,0 +1,32 @@
+//GDG1     JOB 'COLUM,MO','LIPTAK,TREVOR',MSGCLASS=H,CLASS=A,          
+//         MSGLEVEL=(1,1),NOTIFY=&SYSUID                           
+//********************************                                 
+//*                              *                                 
+//* LIST ALL DATASET FOR THE GDG *                                 
+//*                              *                                 
+//********************************                                 
+//STE1     EXEC PGM=IDCAMS,COND=(0,NE)                             
+//SYSPRINT DD   SYSOUT=*                                           
+//SYSIN    DD   *,SYMBOLS=EXECSYS                                  
+  LISTCAT-                                                         
+      ENTRIES(&SYSUID..PROJ2D1.GDG)-                               
+      ALL                                                          
+/*                                                                 
+//*****************************************************************
+//*                                                               *
+//* IF NO DATASETS WERE FOUND WITH STEP1 THEN CREATE THAT DATASET *
+//*                                                               *
+//*****************************************************************
+//STEP2    EXEC PGM=IDCAMS,COND=(4,NE)                             
+//SYSPRINT DD   SYSOUT=*                                           
+//SYSIN    DD   *,SYMBOLS=EXECSYS                                  
+  DEFINE GDG(NAME(&SYSUID..PROJ2D1.GDG)-                           
+  LIMIT(02)-                                                       
+  NOEMPTY-                                                         
+  SCRATCH)                                                         
+/*                                                                 
+//STEP3    EXEC PGM=IEFBR14,COND=(0,NE)                            
+//GDGMODEL DD   DSN=&SYSUID..PROJ2D1.GDG,                          
+//             DISP=(NEW,CATLG,DELETE),                            
+//             SPACE=(TRK,5),UNIT=SYSDA,                           
+//             DCB=(RECFM=VB,LRECL=133,BLKSIZE=13300,DSORG=PS)     
