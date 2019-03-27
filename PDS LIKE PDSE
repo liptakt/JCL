@@ -1,0 +1,21 @@
+//PROJ2C5  JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,              
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                                   
+//*                                                                 
+//* EXECUTES IEBCOPY. COPYS PDS TO PDSE USING LIKE. SPECIFY DSN     
+//* TO MAKE SURE IT TURNS TO A PDSE.                                
+//* NEXT STEP COMPRESSES THE PDSE                                   
+//*                                                                 
+//* CAN ALL BE DONE IN ONE STEP. DO NOT NEED TO CALL DSN AGAIN SINCE
+//* IT HAS ALREADY  BEEN MADE. WILL CREATE PDSE THEN COPY. WILL NOT 
+//* ALLOCATE AGAIN BECAUSE PDSE DOES THIS AUTO.                                                 
+//*                                                                 
+//STEP1    EXEC PGM=IEBCOPY                                         
+//SYSPRINT DD SYSOUT=*                                              
+//IN1      DD   DSN=MFAPP13.PROJ2B1.PDS,DISP=SHR                    
+//OUT2     DD   DSN=MFAPP13.PROJ2C5.PDSE,DISP=(NEW,CATLG),          
+//            LIKE=MFAPP13.PROJ2B1.PDS,                             
+//            DSNTYPE=LIBRARY                                       
+//SYSIN    DD *                                                     
+    COPY OUTDD=OUT2,INDD=IN1                                        
+    COPY INDD=OUT2,OUTDD=OUT2                                       
+/*                                                                  
