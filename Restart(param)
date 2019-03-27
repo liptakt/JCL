@@ -1,0 +1,40 @@
+//PROJ2C6  JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,                  
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID,RESTART=JS000100                      
+//*********************************************************************/
+//*                                                                   */
+//* Allocate a PDS called &SYSUID.PROJ2C6.PDS                         */
+//*                                                                   */
+//*********************************************************************/
+//JS000100 EXEC PGM=IEFBR14                                             
+//DD1      DD  DSN=&SYSUID..PROJ2C6.PDS,                                
+//             DISP=(NEW,CATLG),                                        
+//             DCB=(RECFM=FB,LRECL=80,BLKSIZE=0,DSORG=PO),              
+//             SPACE=(CYL,(1,1,10)),                                    
+//             UNIT=SYSDA                                               
+//*                                                                     
+//*********************************************************************/
+//*                                                                   */
+//* Copy MEMBER2 from APPREN.MASTER.PDS to the dataset created        */
+//* in step JS000100 and rename the member to PROJ2C6.                */
+//*                                                                   */
+//*********************************************************************/
+//JS000200 EXEC PGM=IEBCOPY                                             
+//SYSPRINT DD  SYSOUT=*                                                 
+//IN1      DD  DSN=APPREN.MASTER.PDS,                                   
+//             DISP=SHR                                                 
+//OUT1     DD  DSN=&SYSUID..PROJ2C6.PDS,                                
+//             DISP=SHR                                                 
+//SYSUT3   DD  UNIT=SYSDA,SPACE=(TRK,(1,1,1))                           
+//SYSIN    DD  *                                                        
+       COPY    INDD=IN1,OUTDD=OUT1                                      
+       SELECT  MEMBER=((MEMBER2,PROJ2C6))                               
+/*       
+//*                                                                     
+//*********************************************************************/
+//*                                                                   */
+//* If job step JS000200 RC > 4 then run IEFBR14.                     */
+//*                                                                   */
+//*********************************************************************/
+// IF (JS000200.RC > 4) THEN                                            
+//JS000300 EXEC PGM=IEFBR14                                             
+// ENDIF                                                                
