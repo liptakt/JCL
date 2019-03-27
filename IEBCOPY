@@ -2,7 +2,7 @@
 //  MSGLEVEL=(1,1),NOTIFY=&SYSUID
 //*
 //* Create a new member called sysuid.master.pds
-//* Copy appren.master.pds to new created member
+//* Copy appren.master.pds to new created pds member
 //*
 //STEP1    EXEC PGM=IEFBR14                           
 //NEWPDS   DD   DSN=MFAPP13.MASTER.PDS,               
