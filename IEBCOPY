@@ -1,0 +1,18 @@
+//JCL1     JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID
+//*
+//* Create a new member called sysuid.master.pds
+//* Copy appren.master.pds to new created member
+//*
+//STEP1    EXEC PGM=IEFBR14                           
+//NEWPDS   DD   DSN=MFAPP13.MASTER.PDS,               
+//            DISP=(NEW,CATLG),                       
+//            VOL=SER=VPMVSB,                         
+//            UNIT=3390,                              
+//            BLKSIZE=27920,                          
+//            RECFM=FB,LRECL=80,                      
+//            SPACE=(CYL,(1,1,1))                     
+//STEP2    EXEC PGM=IEBCOPY                           
+//SYSPRINT DD SYSOUT=*                                
+//SYSUT1   DD   DSN=APPREN.MASTER.PDS,DISP=SHR        
+//SYSUT2   DD   DSN=MFAPP13.MASTER.PDS,DISP=SHR       
