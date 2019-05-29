@@ -1,0 +1,13 @@
+//PROJ4    JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                     
+//*                                                   
+//*                                                   
+//STEP1  EXEC PGM=IDCAMS                              
+//SYSPRINT DD SYSOUT=*                                
+//SYSIN    DD *                                       
+   DEFINE CLUSTER (           -                       
+   NAME(MFAPP13.PROJ4.VSAM)   -                       
+   VOLUMES(VPMVSB)            -                       
+   INDEXED KEY(16,0)          -                       
+   TRACKS(5,4))                                       
+/*                                                    
