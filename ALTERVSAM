@@ -1,0 +1,14 @@
+//PROJ45   JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A,
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                     
+//*                                                   
+//*                                                   
+//STEP1    EXEC PGM=IDCAMS                            
+//SYSPRINT DD SYSOUT=*                                
+//SYSIN    DD  *                                      
+     ALTER -                                          
+                MFAPP13.PROJ4.VSAM -                  
+                NEWNAME(MFAPP13.PROJ4.OLD.VSAM)       
+     ALTER -                                          
+                MFAPP13.PROJ4.VSAM.* -                
+                NEWNAME(MFAPP13.PROJ4.OLD.VSAM.*)     
+/*                                                    
