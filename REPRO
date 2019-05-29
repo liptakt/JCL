@@ -1,0 +1,12 @@
+//PROJ43   JOB 'COLUM,MO','TREVOR',MSGCLASS=H,CLASS=A, 
+//  MSGLEVEL=(1,1),NOTIFY=&SYSUID                      
+//*                                                    
+//*                                                    
+//STEP1    EXEC PGM=IDCAMS                             
+//INPUT    DD DSNAME=APPREN.PROJ4.INPUT,DISP=SHR       
+//SYSPRINT DD SYSOUT=*                                 
+//SYSIN    DD  *                                       
+     REPRO -                                           
+           INFILE(INPUT) -                             
+           OUTDATASET(MFAPP13.PROJ4.VSAM)              
+/*                                                     
